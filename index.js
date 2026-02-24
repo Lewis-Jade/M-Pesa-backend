@@ -63,7 +63,7 @@ app.post('/stkpush', async (req, res) => {
         PartyA: phone,
         PartyB: SHORTCODE,
         PhoneNumber: phone,
-        CallBackURL: "https://7c39dab2e46d.ngrok-free.app/callback",
+        CallBackURL: "https://673e-154-159-238-15.ngrok-free.app/callback",
         AccountReference: "CoffeeCafe",
         TransactionDesc: "Coffee Purchase"
     };
@@ -98,3 +98,68 @@ app.post('/callback', (req, res) => {
 
 // --------- Start Server ---------
 app.listen(PORT, () => console.log(`🚀 Sandbox STK Server running on port ${PORT}`));
+
+
+
+
+
+// --------- STK Push Endpoint (Sandbox Override Phone Only) ---------
+// app.post('/stkpush', async (req, res) => {
+//     const { phone, amount } = req.body;
+
+//     if (!phone || !amount) {
+//         return res.status(400).send({ error: 'Phone and amount are required' });
+//     }
+
+//     const token = await getAccessToken();
+//     if (!token) return res.status(500).send({ error: 'Failed to get access token' });
+
+//     // 🔁 Always override to sandbox test number
+//     const sandboxPhone = "254708374149";
+
+//     // Timestamp format YYYYMMDDHHMMSS
+//     const timestamp = new Date().toISOString().replace(/[-:TZ.]/g, '').slice(0, 14);
+//     const password = Buffer.from(`${SHORTCODE}${PASSKEY}${timestamp}`).toString('base64');
+
+//     const payload = {
+//         BusinessShortCode: SHORTCODE,
+//         Password: password,
+//         Timestamp: timestamp,
+//         TransactionType: "CustomerPayBillOnline",
+//         Amount: parseInt(amount), // keep user's amount
+//         PartyA: sandboxPhone,
+//         PartyB: SHORTCODE,
+//         PhoneNumber: sandboxPhone,
+//         CallBackURL: "https://7c39dab2e46d.ngrok-free.app/callback",
+//         AccountReference: "CoffeeCafe",
+//         TransactionDesc: `Coffee Purchase - KES ${amount}`
+//     };
+
+//     console.log("📱 User entered phone:", phone);
+//     console.log("💰 User entered amount:", amount);
+//     console.log("🔁 Overriding phone to sandbox:", sandboxPhone);
+
+//     try {
+//         const response = await axios.post(
+//             'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
+//             payload,
+//             {
+//                 headers: {
+//                     Authorization: `Bearer ${token}`,
+//                     "Content-Type": "application/json"
+//                 }
+//             }
+//         );
+
+//         console.log("✅ STK Push Response:", response.data);
+
+//         res.send({
+//             message: "STK Push simulated successfully (Sandbox Mode)",
+//             data: response.data
+//         });
+
+//     } catch (error) {
+//         console.error('❌ STK Push error:', error.response?.data || error.message);
+//         res.status(500).send({ error: 'STK Push failed', details: error.response?.data });
+//     }
+// });
