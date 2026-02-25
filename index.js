@@ -5,7 +5,7 @@ require('dotenv').config(); // load .env at the very top
 const app = express();
 app.use(express.json()); // no need for body-parser in modern express
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const CK = process.env.CONSUMER_KEY;
 const CS = process.env.CONSUMER_SECRET;
