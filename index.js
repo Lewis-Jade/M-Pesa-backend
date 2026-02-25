@@ -63,7 +63,7 @@ app.post('/stkpush', async (req, res) => {
         PartyA: phone,
         PartyB: SHORTCODE,
         PhoneNumber: phone,
-        CallBackURL: "https://673e-154-159-238-15.ngrok-free.app/callback",
+        CallBackURL: "https://m-pesa-backend-xmc8.onrender.com/callback",
         AccountReference: "CoffeeCafe",
         TransactionDesc: "Coffee Purchase"
     };
